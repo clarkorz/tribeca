@@ -62,5 +62,5 @@ ENV BitfinexOrderDestination Bitfinex
 #ENV CoinbaseRestUrl https://api.gdax.com
 #ENV CoinbaseWebsocketUrl wss://ws-feed.gdax.com
 
-WORKDIR tribeca/service
+WORKDIR /usr/src/tribeca/service
 CMD ["forever", "main.js"]
