@@ -1,7 +1,9 @@
 FROM node:5
-RUN apt-get update
+MAINTAINER Clark Wang <clark.wangs@gmail.com>
 
-RUN apt-get install -y git
+RUN apt-get update && RUN apt-get install -y git \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/*
 
 RUN git clone https://github.com/michaelgrosner/tribeca.git
 
