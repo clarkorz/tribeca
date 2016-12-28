@@ -1,19 +1,20 @@
 FROM node:5
 MAINTAINER Clark Wang <clark.wangs@gmail.com>
 
-RUN apt-get update && RUN apt-get install -y git \
+RUN apt-get update \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
-RUN git clone https://github.com/michaelgrosner/tribeca.git
-
-WORKDIR tribeca
+RUN mkdir -p /usr/src/tribeca
+WORKDIR /user/src/tribeca
+COPY . .
 
 # Chose the branch you want to build. Leave as it is if you want to build the master branch (recommanded).
 # RUN git checkout -B YOUR-NAME-OF-THE-BRANCH --track remotes/origin/NAME-OF-THE-BRANCH-IN-GITHUB
 
-RUN npm install -g grunt-cli typings@0.8.1 forever
-RUN npm install
+RUN npm install -g grunt-cli typings@0.8.1 forever \
+  && npm cache clear
+RUN npm install && npm cache clear
 RUN typings install
 RUN grunt compile
 
